@@ -100,9 +100,9 @@ input[type='checkbox'] {
     vertical-align: middle;
 }
 
-.input-group input:checked + label:before {
+/* .input-group input:checked + label:before {
     background-color: #009eff;
-}
+} */
 
 label {
     display: inline-block;
@@ -110,6 +110,10 @@ label {
     font-size: 13px;
     /* margin-top: ; */
     cursor: pointer;
+}
+
+.labelTerms {
+    padding-top: 12px;
 }
 
 .general-error {
@@ -131,4 +135,5 @@ label {
     margin-top: -10px;
     margin-bottom: 10px;
     font-weight: bold;
+    font-size: 14px;
 }
