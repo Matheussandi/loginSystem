@@ -137,3 +137,12 @@ label {
     font-weight: bold;
     font-size: 14px;
 }
+
+.success {
+    background-color: #2AC874;
+    color: #FFF;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}

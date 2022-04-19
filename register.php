@@ -8,6 +8,7 @@
             $name = cleanPost($_POST['fullName']);
             $email = cleanPost($_POST['email']);
             $password = cleanPost($_POST['password']);
+            $passwordCript = sha1($password);
             $repeatPassword = cleanPost($_POST['repeatPassword']);
             $checkbox = cleanPost($_POST['terms']);
 
@@ -29,6 +30,27 @@
 
             if ($checkbox !== "ok") {
                 $errorCheckbox = "Desativado";
+            }
+
+            if (!isset($generalError) && !isset($errorName) && !isset($errorEmail) && !isset($errorPassword) && !isset($errorRepeatPassword) && !isset($errorCheckbox)) {
+                // Verifica a existência do email no banco
+                $sql = $pdo->prepare("SELECT * FROM login WHERE email=? LIMIT 1");
+                $sql->execute(array($email));
+                $user = $sql->fetch();
+                if(!$user) {
+                    $recoverPassword = "";
+                    $token = "";
+                    $status = "";
+                    $status = "new";
+                    $registrationDate = date('d/m/Y');
+
+                    $sql = $pdo->prepare("INSERT INTO login VALUES (null,?,?,?,?,?,?,?)");
+                    if($sql->execute(array($name, $email, $passwordCript, $recoverPassword, $token, $status, $registrationDate))) {
+                        header('location: index.php?result=success');
+                    }
+                } else {
+                    $generalError = "Usuário existente";
+                }
             }
         };
     }
