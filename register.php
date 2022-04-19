@@ -40,13 +40,36 @@
                 if(!$user) {
                     $recoverPassword = "";
                     $token = "";
+                    $cod_confirm = uniqid();
                     $status = "";
                     $status = "new";
                     $registrationDate = date('d/m/Y');
 
-                    $sql = $pdo->prepare("INSERT INTO login VALUES (null,?,?,?,?,?,?,?)");
-                    if($sql->execute(array($name, $email, $passwordCript, $recoverPassword, $token, $status, $registrationDate))) {
-                        header('location: index.php?result=success');
+                    $sql = $pdo->prepare("INSERT INTO login VALUES (null,?,?,?,?,?,?,?,?)");
+                    if($sql->execute(array($name, $email, $passwordCript, $recoverPassword, $token, $cod_confirm, $status, $registrationDate))) {
+                        if($mode=="local") {
+                            header('location: index.php?result=success');
+                        }
+
+                        if($mode=="production") {
+                            $mail = new PHPMailer(true);
+                            try {
+                                // Recipients
+                                $mail->setFrom('sistema@email.com', 'Sistema de Login'); // mandante (Sistema)
+                                $mail->addAddress($email, $name); // receptor
+                                $mail->isHTML(true);          //Set email format to HTML
+                                
+                                // Content - Corpo do e-mail como HTML
+                                $mail->Subject = 'Confirmação do cadastro';
+                                $mail->Body    = '<h1>Por favor, confirme seu email abaixo:</h1><br><br><a style="style=background:#009eff; color:white; padding:15px; border-radius:5px; text-decoration:none;"> href="https://seusistema.com/br/confirmation.php?cod_confirm='.$cod_confirm.'">Confirmar E-mail</a>';
+
+                                $mail->send();
+                                header('location: thanks.php');
+                            } catch (Exception $e) {
+                                echo "Houve um problema ao enviar o e-mail de confirmação {$mail->ErrorInfo}";
+                            }
+                        }
+                        
                     }
                 } else {
                     $generalError = "Usuário existente";

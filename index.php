@@ -1,5 +1,34 @@
 <?php
 require('config/connection.php');
+
+if(isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+    $email = cleanPost($_POST['email']);
+    $password = cleanPost($_POST['password']);
+    $passwordCript = sha1($password);
+
+    $sql = $pdo->prepare("SELECT * FROM login WHERE email=? AND password=? LIMIT 1");
+    $sql->execute(array($email, $passwordCript));
+    $user = $sql->fetch(PDO::FETCH_ASSOC);
+    if($user) {
+        // verifica se o usuário confirmou o email
+        if($user['status']=="confirmed") {
+        // criação do token
+            $token = sha1(uniqid().date('d-m-Y-H-i-s'));
+
+            // Atualiza token do usuário no banco
+            $sql = $pdo->prepare("UPDATE login SET token=? WHERE email=? AND password=?");
+            if($sql->execute(array($token, $email, $passwordCript))) {
+                // amarmazena token na sessão (SESSION)
+                $_SESSION['TOKEN'] = $token;
+                header('location: restricted.php');
+            }
+        } else {
+            $errorLogin = "Por favor, confime seu e-mail !";
+        }
+    } else {
+        $errorLogin = "Usuário e/ou senha incorretos";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +44,7 @@ require('config/connection.php');
 </head>
 
 <body>
-    <form>
+    <form method="post">
         <h1>Login</h1>
 
         <?php if (isset($_GET['result']) && ($_GET['result'] == "success")) { ?>
@@ -24,14 +53,21 @@ require('config/connection.php');
             </div>
         <?php } ?>
 
+        <?php
+            if(isset($errorLogin)) { ?>
+                <div style="text-align:center" class='general-error animate__animated animate__headShake'>
+                <?php echo $errorLogin; ?>
+                </div>
+        <?php } ?>
+
         <div class="input-group">
             <img class="input-icon" src="images/user.png" alt="">
-            <input type="email" placeholder="Email">
+            <input type="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="input-group">
             <img class="input-icon" src="images/password.png" alt="">
-            <input type="password" placeholder="Senha">
+            <input type="password" name="password" placeholder="Senha" required>
         </div>
 
 
