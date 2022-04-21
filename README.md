@@ -6,6 +6,8 @@
 - CSS
 
 - [PHP](https://www.php.net/)
+
+- [PHPMailer](https://github.com/PHPMailer/PHPMailer)
  
 - [MySQL](https://www.mysql.com/)
  
