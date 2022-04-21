@@ -3,19 +3,12 @@ session_start();
 
 // Biblioteca para disparo de email
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-
 $mode = 'local';
 
 if ($mode == 'local') {
-    define('HOST', '127.0.0.1:3307');
-    define('DATABASE', 'loginsystem');
-    define('USER', 'root');
+    define('HOST', 'localhost');
+    define('DATABASE', '');
+    define('USER', '');
     define('PASSWORD', '');
 }
 

@@ -9,13 +9,16 @@ body {
     flex-flow: row wrap;
     justify-content:center;
     align-items: center;
-    /* background-color: #FFF; */
-    background: linear-gradient(0deg, rgba(2,0,36,1), rgba(17,150,201,1), rgba(0,212,255,1));
-    background-size: 300% 300%;
+    background-color: #FFF;
     width: 100vw;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     animation: colors 7s ease-out infinite;
+}
+
+.gradient {
+    background: linear-gradient(0deg, rgba(2,0,36,1), rgba(17,150,201,1), rgba(0,212,255,1));
+    background-size: 300% 300%;
 }
 
 @keyframes colors {
@@ -68,7 +71,7 @@ input:focus {
 }
 
 .btn-blue {
-    width: 88%;
+    width: 90%;
     margin: 10px 0;
     padding: 15px;
     cursor: pointer;
@@ -89,6 +92,11 @@ a {
     text-decoration: none;
     margin-top: 10px;
     color: #000;
+}
+
+.high {
+    margin-top: -25px;
+    font-size: 1.2rem;
 }
 
 .link {
@@ -165,8 +173,21 @@ label {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.image-email {
-    height: 70px;
-    width: 70px;
-    margin: 0.5rem;
+.gmail {
+    background: red;
+    color: #FFF;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.outlook {
+    background: #00aeFF;
+    color: #FFF;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.gmail:hover, .outlook:hover {
+    color: #FFF;
 }
