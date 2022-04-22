@@ -39,8 +39,7 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             $errorCheckbox = "Desativado";
         }
 
-        if (!isset($generalError) && !isset($errorName) && !isset($errorEmail) && !isset($errorPassword) 
-            && !isset($errorRepeatPassword) && !isset($errorCheckbox)) {
+        if (!isset($generalError) && !isset($errorName) && !isset($errorEmail) && !isset($errorPassword) && !isset($errorRepeatPassword) && !isset($errorCheckbox)) {
             // Verifica a existência do email no banco
             $sql = $pdo->prepare("SELECT * FROM login WHERE email=? LIMIT 1");
             $sql->execute(array($email));
@@ -49,7 +48,7 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
                 $recoverPassword = "";
                 $token = "";
                 $cod_confirm = uniqid();
-                $status = "";
+                $site = 'http://systemlogin-matheussandi.tech/';
                 $status = "new";
                 $registrationDate = date('d/m/Y');
 
@@ -69,10 +68,7 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
                             // Content - Corpo do e-mail como HTML
                             $mail->isHTML(true);          //Set email format to HTML
                             $mail->Subject = 'Confirme seu cadastro';
-                            $mail->Body    = '<h1>Por favor confirme seu e-mail abaixo:</h1><br>
-                            <a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" 
-                            href=https://systemlogin-matheussandi.tech/login/confirmation.php?cod_confirm=' . $cod_confirm . '">Confirmar</a>
-                            <br><br><p>Equipe de Login</p>';
+                            $mail->Body    = '<h1>Por favor confirme seu e-mail abaixo:</h1><br><a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" href="'.$site.'confirmation.php?cod_confirm='.$cod_confirm.'">Confirmar</a><br><br><p>Equipe de Login</p>';
 
                             $mail->send();
                             header('location: thanks.php');
@@ -116,12 +112,9 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             <img class="input-icon" src="images/user.png">
             <input <?php if (isset($generalError) or isset($errorName)) {
                         echo 'class="error-input"';
-                    } ?> type="text" name="fullName" 
-                    
-                    <?php if (isset($_POST['fullname'])) {
-                        echo "value='" . $_POST['fullname'] . "'";
-                    } ?> placeholder="Nome Completo" required>
-                    
+                    } ?> type="text" name="fullName" <?php if (isset($_POST['fullname'])) {
+                                                            echo "value='" . $_POST['fullname'] . "'";
+                                                        } ?> placeholder="Nome Completo" required>
             <?php if (isset($errorName)) { ?>
                 <div class="error"><?php echo $errorName; ?></div>
             <?php } ?>
@@ -131,12 +124,9 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             <img class="input-icon" src="images/email.png">
             <input <?php if (isset($generalError) or isset($errorEmail)) {
                         echo 'class="error-input"';
-                    } ?> type="email" name="email" 
-                    
-                    <?php if (isset($_POST['email'])) {
-                        echo "value='" . $_POST['email'] . "'";
-                    } ?> placeholder="Email" required>
-
+                    } ?> type="email" name="email" <?php if (isset($_POST['email'])) {
+                                                        echo "value='" . $_POST['email'] . "'";
+                                                    } ?> placeholder="Email" required>
             <?php if (isset($errorEmail)) { ?>
                 <div class="error"><?php echo $errorEmail; ?></div>
             <?php } ?>
@@ -146,12 +136,9 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             <img class="input-icon" src="images/password.png">
             <input <?php if (isset($generalError) or isset($errorPassword)) {
                         echo 'class="error-input"';
-                    } ?> type="password" name="password" 
-                    
-                    <?php if (isset($_POST['password'])) {
-                        echo "value='" . $_POST['password'] . "'";
-                    } ?> placeholder="Senha" required>
-
+                    } ?> type="password" name="password" <?php if (isset($_POST['password'])) {
+                                                                echo "value='" . $_POST['password'] . "'";
+                                                            } ?> placeholder="Senha" required>
             <?php if (isset($errorPassword)) { ?>
                 <div class="error"><?php echo $errorPassword; ?></div>
             <?php } ?>
@@ -161,12 +148,9 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             <img class="input-icon" src="images/password.png">
             <input <?php if (isset($generalError) or isset($errorRepeatPassword)) {
                         echo 'class="error-input"';
-                    } ?> type="password" name="repeatPassword" 
-                    
-                    <?php if (isset($_POST['repeatPassword'])) {
-                        echo "value='" . $_POST['repeatPassword'] . "'";
-                    } ?> placeholder="Repetir senha" required>
-
+                    } ?> type="password" name="repeatPassword" <?php if (isset($_POST['repeatPassword'])) {
+                                                                    echo "value='" . $_POST['repeatPassword'] . "'";
+                                                                } ?> placeholder="Repetir senha" required>
             <?php if (isset($errorRepeatPassword)) { ?>
                 <div class="error"><?php echo $errorRepeatPassword; ?></div>
             <?php } ?>
@@ -178,8 +162,7 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
                     echo 'class="input-group labelTerms"';
                 } ?>>
             <input type="checkbox" id="terms" name="terms" value="ok" required>
-            <label for="terms">Ao se cadastrar você concorda com a nossa 
-            <a href="#" class="link">Política de Privacidade</a> e os <a href="#" class="link">Termos de uso.</a></label>
+            <label for="terms">Ao se cadastrar você concorda com a nossa <a href="#" class="link">Política de Privacidade</a> e os <a href="#" class="link">Termos de uso.</a></label>
         </div>
 
         <button class="btn-blue" type="submit">Cadastrar</button>

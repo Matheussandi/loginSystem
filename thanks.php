@@ -14,8 +14,7 @@
     <div class="text-center">
         <center>
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_d3vw5gid.json" 
-            background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_d3vw5gid.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
         </center>
         <h1>Obrigado por se cadastrar !!!</h1>
         <p>Enviamos um e-mail para o endereço cadastrado. <br>Por favor, confirme o cadastro na sua caixa de entrada ou de spam.</p>

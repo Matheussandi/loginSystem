@@ -31,10 +31,12 @@ if (isset($_GET['cod']) && !empty($_GET['cod'])) {
             if (!isset($generalError) && !isset($errorPassword) && !isset($errorRepeatPassword)) {
                 // Verifica a existência da recuperação de senha
                 $sql = $pdo->prepare("SELECT * FROM login WHERE recoverPassword=? LIMIT 1");
-                $sql->execute(array($codi));
+                $sql->execute(array($cod));
                 $user = $sql->fetch();
                 if (!$user) {
-                    echo "Recuperação de senha inválida";
+                    echo "<div style='position:absolute; margin-top: -30rem;' class='general-error animate__animated animate__headShake'>
+                            Recuperação de senha inválida
+                          </div>";
                 } else {
                     // Caso já exista usuário com este código de recuperação 
                     $sql = $pdo->prepare("UPDATE login SET password=? WHERE recoverPassword=?");
@@ -80,12 +82,9 @@ if (isset($_GET['cod']) && !empty($_GET['cod'])) {
             <img class="input-icon" src="images/password.png">
             <input <?php if (isset($generalError) or isset($errorPassword)) {
                         echo 'class="error-input"';
-                    } ?> type="password" name="password" 
-                    
-                    <?php if (isset($_POST['password'])) {
-                        echo "value='" . $_POST['password'] . "'";
-                    } ?> placeholder="Senha com no mínimo 6 dígitos" required>
-
+                    } ?> type="password" name="password" <?php if (isset($_POST['password'])) {
+                                                                echo "value='" . $_POST['password'] . "'";
+                                                            } ?> placeholder="Senha com no mínimo 6 dígitos" required>
             <?php if (isset($errorPassword)) { ?>
                 <div class="error"><?php echo $errorPassword; ?></div>
             <?php } ?>
@@ -95,12 +94,9 @@ if (isset($_GET['cod']) && !empty($_GET['cod'])) {
             <img class="input-icon" src="images/password.png">
             <input <?php if (isset($generalError) or isset($errorRepeatPassword)) {
                         echo 'class="error-input"';
-                    } ?> type="password" name="repeatPassword" 
-                    
-                    <?php if (isset($_POST['repeatPassword'])) {
-                        echo "value='" . $_POST['repeatPassword'] . "'";
-                    } ?> placeholder="Repetir senha" required>
-
+                    } ?> type="password" name="repeatPassword" <?php if (isset($_POST['repeatPassword'])) {
+                                                                    echo "value='" . $_POST['repeatPassword'] . "'";
+                                                                } ?> placeholder="Repetir senha" required>
             <?php if (isset($errorRepeatPassword)) { ?>
                 <div class="error"><?php echo $errorRepeatPassword; ?></div>
             <?php } ?>

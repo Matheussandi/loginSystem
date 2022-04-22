@@ -14,8 +14,8 @@
     <div class="text-center">
         <center>
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_mbginykv.json" 
-            background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></lottie-player>
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_mbginykv.json" backgroun="transparent" speed="1" style="width: 400px; height: 400px;"
+            loop autoplay></lottie-player>
         </center>
         <h1>Esqueceu sua senha ?</h1>
         <p>Não se preocupe, enviamos um e-mail para que você possa realizar a modificação.</p>

@@ -191,3 +191,13 @@ label {
 .gmail:hover, .outlook:hover {
     color: #FFF;
 }
+
+@media screen and (max-width: 568px) {
+    form {
+        margin: 0 2rem;
+    }
+
+    input {
+        padding-left: 15%;
+    }
+}

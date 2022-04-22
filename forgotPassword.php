@@ -19,6 +19,7 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
         // Envia para o usuário cria uma nova senha
         $mail = new PHPMailer(true);
         $cod = sha1(uniqid());
+        $site = 'http://systemlogin-matheussandi.tech/';
 
         // Atualiza o código de recuperação do usuário no banco
         $sql = $pdo->prepare("UPDATE login SET recoverPassword=? WHERE email=?");
@@ -31,7 +32,7 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
                 // Content - Corpo do e-mail como HTML
                 $mail->isHTML(true);          //Set email format to HTML
                 $mail->Subject = 'Recupere sua senha';
-                $mail->Body    = '<h1>Recupere a senha:</h1><br><a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" href=https://systemlogin-matheussandi.tech/login/confirmation.php?cod_confirm=' . $cod . '">Recuperar</a><br><br><br><p>Equipe de Suporte</p>';
+                $mail->Body    = '<h1>Recupere a senha:</h1><br><a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" href="'. $site .'recoverPassword.php?cod=' . $cod . '">Recuperar</a><br><br><br><p>Equipe de Suporte</p>';
 
                 $mail->send();
                 header('location: thanksPassword.php');
