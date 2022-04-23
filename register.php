@@ -112,8 +112,8 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
             <img class="input-icon" src="images/user.png">
             <input <?php if (isset($generalError) or isset($errorName)) {
                         echo 'class="error-input"';
-                    } ?> type="text" name="fullName" <?php if (isset($_POST['fullname'])) {
-                                                            echo "value='" . $_POST['fullname'] . "'";
+                    } ?> type="text" name="fullName" <?php if (isset($_POST['fullName'])) {
+                                                            echo "value='" . $_POST['fullName'] . "'";
                                                         } ?> placeholder="Nome Completo" required>
             <?php if (isset($errorName)) { ?>
                 <div class="error"><?php echo $errorName; ?></div>
