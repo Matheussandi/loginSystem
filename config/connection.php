@@ -3,7 +3,7 @@ session_start();
 
 // Biblioteca para disparo de email
 
-$mode = 'local';
+$mode = 'production';
 
 if ($mode == 'local') {
     define('HOST', 'localhost');

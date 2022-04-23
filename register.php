@@ -68,7 +68,7 @@ if (isset($_POST['fullName']) && isset($_POST['email']) && isset($_POST['passwor
                             // Content - Corpo do e-mail como HTML
                             $mail->isHTML(true);          //Set email format to HTML
                             $mail->Subject = 'Confirme seu cadastro';
-                            $mail->Body    = '<h1>Por favor confirme seu e-mail abaixo:</h1><br><a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" href="'.$site.'confirmation.php?cod_confirm='.$cod_confirm.'">Confirmar</a><br><br><p>Equipe de Login</p>';
+                            $mail->Body    = '<h1>Por favor confirme seu e-mail abaixo:</h1><br><a style="background:#009eff; color:white; text-decoration:none; padding:20px; border-radius:5px;" href="' .$site. 'confirmation.php?cod_confirm=' . $cod_confirm . '">Confirmar</a><br><br><p>Equipe de Login</p>';
 
                             $mail->send();
                             header('location: thanks.php');
